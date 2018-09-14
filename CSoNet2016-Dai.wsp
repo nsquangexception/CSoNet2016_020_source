@@ -1,0 +1,11 @@
+[main]
+.\paper.tex
+
+[texfiles]
+.\bib.bib
+.\1-intro.tex
+.\2-related-work.tex
+.\3-proposed-method.tex
+.\4-experiments.tex
+.\5-conclusion.tex
+

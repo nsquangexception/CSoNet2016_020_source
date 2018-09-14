@@ -1,0 +1,31 @@
+\section{Related work} \label{related-work}
+
+ABSA approaches may be divided into three main categories: rule-based, supervised learning, and unsupervised learning.
+
+% Rule-based
+Rule-based approaches~\cite{bingliu,Ding} can perform quite well in a large number of domains.
+They use a sentiment lexicon, expressions, rules of opinions, and the sentence parse tree to help classify the sentiment orientation on each aspect appeared in a review.
+They also consider sentiment shifter words (i.e. \textit{not}, \textit{none}, \textit{nobody}, etc.).
+However, these rule-based methods have a shortcoming in processing complex documents where the aspect is hidden in the sentence, and failing to group extracted aspect terms into categories.
+
+% Supervised AE + SC
+For the supervised learning approach, Wei and Gulla~\cite{Wei_Gulla} propose a hierarchical classification model to determine the dependency and the other relevant information in the sentence.
+Jiang et al.~\cite{Jiang}, Boiy and Moens~\cite{Boiy} use dependency parser to generate a set of aspect-dependent features for classification, which weighs each feature based on the position of the feature relative to the target aspect in the parse tree.
+Several other supervised learning models have been published, such as Hidden Markov Models~\cite{Jin_Wei}, SVMs~\cite{ABSA_SVM}, Conditional Random Fields~\cite{Choi_Yejin,Jakob_Iryna}.
+
+% Unsupervised AE + SC
+% Joint model
+It has been demonstrated that a classifier trained from labeled data in one domain often performs poorly in another domain~\cite{BingLiubooks}.
+Hence, unsupervised methods are often adopted to avoid this issue.
+Several recent studies investigate statistical topic models which are unsupervised learning methods.
+They assume that each document consists of a mixture of topics.
+Specifically, Latent Dirichlet Allocation (LDA)~\cite{LDA_Blei}, Multi-Grain LDA model~\cite{Titov_Ryan} are used to model and extract topics from document collections.
+A number of authors have considered the effects of topic models on ABSA task, such as the two-step approach~\cite{Brody_Elhadad}, joint sentiment/topic model~\cite{Lin_He}, and topic-sentiment mixture model~\cite{Mei}.
+A recent study by Wang et al.~\cite{serbm} proposed the SERBM model which also jointly address these two tasks in an unsupervised setting.
+% The two-step approach by Brody and Elhadad~\cite{Brody_Elhadad} to detect aspect-specific opinion words includes identifying aspects using topic models and identifying aspect-specific sentiment words by considering adjectives only.
+% The joint sentiment/topic model was proposed by Lin and He~\cite{Lin_He} to separate aspect words and sentiment words.
+% Mei et al.~\cite{Mei} proposed the topic-sentiment mixture model based on three separated models with the help of some external training data is proposed to extract aspect and sentiment words.
+
+%Supervised learning is dependent on the training data and has difficulty to scale up to a large number of application domains.
+
+

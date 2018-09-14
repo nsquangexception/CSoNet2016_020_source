@@ -1,0 +1,81 @@
+\section{Introduction} \label{introduction}
+% Giới thiệu bài toán Sentiment Analysis
+Sentiment Analysis (also known as opinion mining) is the process of determining whether a piece of writing is positive or negative.
+With the development of opinionated user-generated review sites, many customers can write reviews and express their opinions about the products (or services).
+Sentiment Analysis could help not only users to choose the right products but also companies to improve their products based on these reviews.
+
+% Giới thiệu bài toán AB Sentiment Analysis, joint model
+Aspect-based Sentiment Analysis (ABSA) has received much attention in recent years since each review might contain many aspects.
+For example, in a restaurant review, we may have opinions about \textit{food}, \textit{staff}, \textit{ambience}, etc.
+Conventional ABSA systems normally have two separated modules: one for aspect extraction and another one for sentiment classification~\cite{bingliu,google,WebUserAnalysis_kumar}.
+Recently, Wang et al.~\cite{serbm} introduced a joint model, called Sentiment-Aspect Extraction based on Restricted Boltzmann Machines (SERBM), that extract aspects and classify sentiments at the same time.
+In this model, they used unsupervised Restricted Boltzmann Machine~(RBM) and three different types of hidden units to represent aspects, sentiments, and background information, respectively.
+Furthermore, they added prior knowledge into this model to help it acquire more accurate feature representations.
+The visible layer $\textbf{v}$ of SERBM is represented as a $K \times D$ matrix, where $K$ is the dictionary size and $D$ is the document length.
+They showed that their model is well-suited for solving aspect-based sentiment analysis tasks.
+
+% research gap
+However, there are two main problems still exist in the SERBM model.
+Firstly, an unsupervised method can only cluster reviews into categories and we can not know the name of the category.
+No information was given to determine which position of the hidden units to represent aspects, sentiments or background words during the training process.
+Secondly, a visible layer will be a matrix combined by high-dimensional vectors if training data has a large set of vocabulary, which requires much computational resource.
+
+% Proposed
+In this paper, we propose combining Restricted Boltzmann Machine with Word Embedding model to overcome the limitations of existing method.
+Word Embedding model has the capability of reducing the dimensionality of the input vectors.
+Therefore, we can use it to reduce the dimensionality of the input in visible layer while keeping the semantics of the reviews.
+We encode the input document as a vector, created by the Word Embedding model, instead the vector of one-hot encoding Bag Of Words model.
+Furthermore, we use RBM in a supervised setting.
+We move the output component from hidden layer to visible layer.
+The hidden layer now acts as the dependencies between the components in the visible layer.
+Doing like this, we can fix the units for desired categories.
+
+We call our model Word Embedding Restricted Boltzmann Machine (WE-RBM).
+Overall, our main contributions are as follows:
+\begin{itemize}
+\item This is the first work that combines Word Embedding model and supervised RBM for the ABSA task. Compared with other state-of-the-art methods, our model can identify aspects and sentiments efficiently, yielding 1-6\% improvements in accuracy for sentiment classification task and 1.73\% to 7.06\% improvements in F1 score for aspect extraction task.
+\item By using Word Embedding model, we can efficiently reduce the size of input vectors up to 100 times, which in turn reduces the training time greatly.
+\item We also introduce a simple yet efficient way to incorporate prior knowledge into RBM model. Prior knowledge is the advantage of Word Embedding model, which can help RBM to be well-suited for solving aspect-based opinion mining tasks.
+\end{itemize}
+
+% Format of the paper
+The rest of this paper is organized as follows.
+Section~\ref{related-work} introduces the related work.
+Section~\ref{proposed-method} overviews the background information, then describes our approach to classify reviews into aspect categories and predict sentiment polarity of the reviews.
+Experimental results are presented in Section~\ref{experiments}.
+Finally, Section~\ref{conclusion} concludes the paper and discusses future work.
+
+% The results obtained based on the dataset of reviews in restaurant domain, which widely adopted by previous work~\cite{data_ganu,Brody_Elhadad,Zhao} (Ganu et al., 2009; Brody and Elhadad, 2010; Zhao et al., 2010).
+
+%Therefore, new customers may find it difficult to explore the large number of reviews in order to make right decision, since many people have different purposes, which base on different aspects of the product.
+
+% These two parts are analyzing opinionated texts, such as opinions, sentiments by extracting the aspect-term appeared in the sentences, and classifying them into two classes (positive or negative).
+% It helps people make the right decisions thanks to the fine-grained analysis on each aspect of the products.
+% In previous work, Liu and Hu~\cite{bingliu,google,WebUserAnalysis_kumar} proposed combining two or more modules to complete the ABSA model.
+% For instance, we can use one for extracting aspect-sentiment word pairs, one for sentiment prediction, another optional module is to summarize the opinions.
+
+% giving a brief synopsis of the relevant literature
+% Some work has been investigated to extract the candidate product feature opinion pairs.
+% Kumar and Raghuveer~\cite{WebUserAnalysis_kumar} use the rules on the typed dependency tree, then they use lexicons to classify and generate a summary of the product.
+% In Toh and Wang~\cite{Toh_and_Wang}, they build a Conditional Random Field (CRF) based classifier for Aspect Term Extraction and a linear classifier for Aspect Term Polarity Classification, but there is no method to extract the opinion words in the sentences.
+% Unsupervised method such as Latent Dirichlet Allocation (Blei et al., 2003)~\cite{LDA_Blei} is also used to extract and group corresponding representative words into categories.
+% Such approaches, however, must use two-separated modules to perform both aspect extraction and sentiment classification, or just only have ability to solve one of these tasks.
+
+% research gap
+% Hence, Wang et al.~\cite{serbm} adapted the Sentiment-Aspect Extraction based on Restricted Boltzmann Machines (SERBM) to overcome this problem.
+% Three different types of hidden units are used to represent aspects, sentiments, and background words in this model, respectively.
+% Furthermore, they blend background knowledge into this model using priors and regularization to help it acquire more accurate feature representations.
+% The visible layer $\textbf{v}$ of SERBM is represented as a $K \times D$ matrix, where $K$ is the dictionary size and $D$ is the document length, or the number of sentences in reviews.
+% However, much uncertainty still exists about the defined hidden units in hidden layer.
+% First, unsupervised method can just cluster reviews into categories and can not fix the unit for desired category.
+% No information given to determine which position of the hidden units to represent aspects, sentiments or background words during the training process.
+% Second, visible layer would be a matrix combined by high-dimensional vectors if training data set had varied vocabulary, which result in insufficient computational resources.
+
+% My work and paper format
+% In this paper, we implement Vector Space model combined with Restricted Boltzmann Machine (VS-RBM) to extract aspect term appeared and classify sentiment polarity of the sentences.
+% The reasons we propose VS-RBM include the ability to jointly model aspect and sentiment information together and the capability in reducing dimensionality of the input vectors.
+% In this two-layer structure model, we do not use hidden layer as output layer but the dependencies between the components of observations in visible layer.
+% Each input unit in the visible layer is a component of the feature vector, created by the Vector Space Model instead of using the Bag Of Words model as previous approach.
+% This helps reduce the dimensionality of the input while keeping documents' semantics.
+% The results obtained based on the dataset of reviews in restaurant domain, which widely adopted by previous work~\cite{data_ganu,Brody_Elhadad,Zhao} (Ganu et al., 2009; Brody and Elhadad, 2010; Zhao et al., 2010).
+

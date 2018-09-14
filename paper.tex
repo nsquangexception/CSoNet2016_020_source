@@ -1,0 +1,78 @@
+\documentclass[runningheads,a4paper]{llncs}
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{url}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{caption} 
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\captionsetup[table]{skip=10pt}
+\urldef{\mailsa}\path|{1212069,1212304}@student.hcmus.edu.vn, nqminh@fit.hcmus.edu.vn|
+
+\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+\noindent\keywordname\enspace\ignorespaces#1}
+
+
+\begin{document}
+
+\mainmatter
+
+% Title của paper
+\title{Aspect-based Sentiment Analysis using \\ Word Embedding Restricted Boltzmann Machines}
+% a short form should be given in case it is too long for the running head
+\titlerunning{Aspect-based Sentiment Analysis using Word Embedding RBM}
+% Authors
+
+\author{Bao-Dai Nguyen-Hoang
+\and Quang-Vinh Ha
+\and Minh-Quoc Nghiem}
+
+
+% Nơi làm việc công tác
+% Không cung cấp địa chỉ email nếu chưa được nhận đăng bài
+\institute{Faculty of Information Technology\\
+	Ho Chi Minh City University of Science\\
+	227 Nguyen Van Cu St., Ward 4, District 5, Ho Chi Minh City, Vietnam\\
+\mailsa
+}
+
+%
+% NB: a more complex sample for affiliations and the mapping to the
+% corresponding authors can be found in the file "llncs.dem"
+% (search for the string "\mainmatter" where a contribution starts).
+% "llncs.dem" accompanies the document class "llncs.cls".
+%
+
+\maketitle
+
+
+\begin{abstract}
+Recent years, many studies have addressed problems in sentiment analysis at different levels, and building aspect-based methods has become a central issue for deep opinion mining.
+However, previous studies need to use two separated modules in order to extract aspect-sentiment word pairs, then predict the sentiment polarity.
+In this paper, we use Restricted Boltzmann Machines in combination with Word Embedding model to build the joined model which not only extracts aspect terms appeared and classifies them into respective categories, but also completes the sentiment polarity prediction task.
+The experimental results show that the method we use in aspect-based sentiment analysis tasks is better than other state-of-the-art approaches.
+
+\keywords{Aspect-based, Sentiment Analysis, Opinion Mining, Restricted Boltzmann Machine, Supervised Learning, Word Embedding}
+\end{abstract}
+
+
+\input{1-intro}
+
+\input{2-related-work}
+
+\input{3-proposed-method}
+
+\input{4-experiments}
+
+\input{5-conclusion}
+
+\input{6-acknowledgments}
+
+\bibliographystyle{splncs}
+\bibliography{bib}
+\end{document}
